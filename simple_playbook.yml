@@ -1,0 +1,9 @@
+---
+- name: Configure user account
+  hosts: group1
+  tasks:
+  - name: adding new user
+    user:
+      name: devops
+      uid: 4000
+      state: absent 

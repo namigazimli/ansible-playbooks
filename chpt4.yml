@@ -1,0 +1,39 @@
+---
+- name: Installing packages
+  hosts: nested
+  tasks:
+    - name: Install httpd, firewalld and chrony
+      yum:
+        name:
+          - firewalld
+          - httpd
+          - chrony
+        state: latest
+
+- name: firewalld & httpd enabled and started
+  hosts: group1
+  tasks:
+    - name: firewalld enable and running
+      service: name=firewalld enabled=true state=started
+    
+    - name: httpd enable and running
+      service:
+        name: httpd
+        enabled: true
+        state: started
+
+- name: adding http service to the firewall
+  hosts: group2
+  tasks:
+    - name: enabling firewall
+      service:
+        name: firewalld
+        enabled: true
+        state: started
+
+    - name: adding http to firewall
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: yes

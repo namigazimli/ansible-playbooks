@@ -1,0 +1,11 @@
+---
+- name: Creating user with Ansible variables
+  hosts: managed_host
+  vars:
+    username: step_example
+    user_home_dir: /users/step_example
+  tasks:
+  - name: Create user {{ username }}
+    user:
+      name: "{{ username }}"
+      home: "{{ user_home_dir }}"

@@ -1,0 +1,9 @@
+---
+- name: gathering Ansible facts from all managed hosts
+  hosts: all
+  tasks:
+  - name: Gather kernel version facts 
+    debug:
+      msg: >
+        The kernel version of {{ ansible_facts['hostname'] }} is
+        {{ ansible_facts['kernel'] }}

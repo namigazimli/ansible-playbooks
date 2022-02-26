@@ -1,0 +1,22 @@
+---
+- name: Lineinfile module example
+  hosts: group2
+  tasks:
+  - name: Change LogLevel warn string in httpd.conf file
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: "LogLevel warn"
+      line: "LogLevel debug"
+      state: present
+      backup: true
+
+- name: copy text to /etc/motd
+  hosts: group1
+  tasks:
+  - name: copy text
+    copy:
+      content: |
+        This line is added by Ansible control server.
+        hello world
+        bye.
+      dest: /etc/motd

@@ -1,0 +1,2 @@
+- src: geerlingguy.nginx
+  version: "2.7.0"

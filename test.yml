@@ -1,0 +1,9 @@
+---
+- name: test localhost httpd accessibility
+  hosts: localhost
+  tasks:
+  - name: testing httpd access
+    uri:
+      url: http://localhost
+      return_content: true
+      status_code: 200

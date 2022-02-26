@@ -1,0 +1,5 @@
+---
+- name: use the motd role playbook
+  hosts: nested
+  roles:
+  - role: /roles/motd
