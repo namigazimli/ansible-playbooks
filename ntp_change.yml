@@ -1,0 +1,16 @@
+- name: Change ntp settings for JWT 
+  hosts: all
+  vars:
+    ntp_server_ip: 192.168.1.123        # You can change this to the real NTP server IP address
+  tasks:
+  - name: Pool comment
+    template:
+      src: ntp.conf.j2
+      dest: /etc/ntp.conf
+    notify: Restart NTP service
+
+  handlers: 
+  - name: Restart NTP service
+    service:
+      name: ntp
+      state: restarted
