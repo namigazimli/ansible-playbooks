@@ -1,0 +1,11 @@
+- name: Adding new sysctl parameters
+  hosts: k8s_workers
+  tasks:
+  - name: Use sysctl module
+    sysctl:
+      name: net.ipv4.tcp_mtu_probing
+      value: '1'
+      sysctl_set: yes
+      state: present
+      reload: yes
+      sysctl_file: /etc/sysctl.d/mtu.conf
