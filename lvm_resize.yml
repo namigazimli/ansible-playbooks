@@ -1,0 +1,21 @@
+- name: Resizing vgs and lvms
+  hosts: all
+  vars:
+      vg_name: changeme       
+      lv_name: changeme        
+      pv_list: [/dev/changeme01, /dev/changeme02]
+  tasks:
+  - name: vgresize
+    lvg:
+      vg: "{{ vg_name }}"
+      pvs: "{{ pv_list }}"
+      pvresize: yes
+    ignore_errors: yes
+
+  - name: lvresize
+    lvol:
+      vg: "{{ vg_name }}"
+      lv: "{{ lv_name }}"
+      size: +100%FREE
+      resizefs: true
+...
