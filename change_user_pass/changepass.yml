@@ -1,0 +1,15 @@
+---
+- name: Change Ubuntu user password and create new user
+  hosts: k8s_vms
+  become: true  # Run tasks with sudo
+
+  #become_user: root
+  #become_ask_pass: false
+
+  vars:
+    ubuntu_password: xxxxxxxxxxxxx
+  tasks:
+    - name: Change Ubuntu user password
+      user:
+        name: ubuntu
+        password: "{{ ubuntu_password | password_hash('sha512') }}"
